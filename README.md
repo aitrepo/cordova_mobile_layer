@@ -1,1 +1,1 @@
-# S
+# Cordova backed BookVanStore App.
