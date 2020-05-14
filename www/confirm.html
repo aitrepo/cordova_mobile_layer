@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<title>Hello World</title>
+
+	<link rel="stylesheet" href="themes/sample.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+	<script src="themes/jquery-1.11.1.min.js"></script>
+	<script src="themes/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+	<div data-role="page" id="page1">
+		<div data-role="header">
+			<h1>
+				Page 2
+			</h1>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<p>vvvvvvv for page 2!</p>
+		</div><!-- /content -->
+
+		<div data-role="footer">
+		</div><!-- /fotoer -->
+
+	</div><!-- /page -->
+
+
+
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			$("#changePageButton").click(function () {
+				$.mobile.changePage( "index.html", { transition: "slideup"} );
+
+			});
+		});
+
+	</script>
+
+</body>
+
+</html>

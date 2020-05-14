@@ -1,0 +1,137 @@
+
+	<div data-role="page" id="page1">
+		<div data-role="header">
+			<h1>
+				New user signup
+			</h1>
+		</div><!-- /header -->
+
+		<div data-role="content">
+
+
+			<label for="user-email">Email Address:</label>
+			<input type="text" name="user-email" id="user-email" type="email" value="">
+
+
+			<fieldset data-role="controlgroup">
+				<legend>Book Genere:</legend>
+				<input type="checkbox" name="true_story" id="true_story" value="true_story">
+				<label for="true_story">Non Fictoin</label>
+				<input type="checkbox" name="crime" id="crime" value="crime">
+				<label for="crime">Crime</label>
+				<input type="checkbox" name="biography" value="biography" id="biography">
+				<label for="biography">Biography</label>
+				<input type="checkbox" name="text_books" value="text_books" id="text_books">
+				<label for="text_books">Text Books</label>
+			</fieldset>
+
+			<br />
+			<a href="#" id="save_user_preference" data-role="button">Save</a>
+
+
+		</div>
+
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+	</div>
+	</div><!-- /page -->
+
+	<div data-role="page" id="page2">
+		<div data-role="header">
+			<h1>
+				Page 2
+			</h1>
+		</div><!-- /header -->
+
+		<div data-role="content">
+
+			<ul data-role="listview" data-inset="true">
+				<li><a href="#">
+						<img src="img/hacking.jpg">
+						<h2>Hacking</h2>
+						<p>This book explains explains explains explains explains </p>
+						<p class="ui-li-aside">Autobiogrpahy</p>
+					</a>
+				</li>
+				<br />
+				<li><a href="#">
+						<img src="img/hacking.jpg">
+						<h2>Hacking</h2>
+						<p>This book explains explains explains explains explains </p>
+						<p class="ui-li-aside">Autobiogrpahy</p>
+					</a>
+				</li>
+			</ul>
+
+		</div><!-- /content -->
+
+		<div data-role="footer">
+		</div><!-- /fotoer -->
+
+	</div><!-- /page -->
+
+###################################
+
+
+$(document).ready(function () {
+
+
+
+
+    $.ajax({
+        url: "http://localhost:3000/?interest=true_story,text_books,crime",
+        beforeSend: function (xhr) {
+            xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        }
+    })
+        .done(function (data) {
+            let result =  JSON.parse(data);
+            //alert("Data loaded")
+
+            // Map to the UI elements	
+
+            alert("dtsesf")
+            for (const property in result) {
+console.log(`${property}: ${object[property]}`);
+}
+
+            let bookItem = `<li><a href="#"><img src="img/hacking.jpg">
+                <h2>Hacking</h2><p>This book explains explains explains explains explains </p>
+                <p class="ui-li-aside">Autobiogrpahy</p></a></li>`;
+            
+        
+        });
+
+
+
+
+
+    let userPreference = new Set();
+
+    if (window.localStorage.USR_PREF != undefined) {
+        $.mobile.changePage("#page2");
+    }
+
+    $("input[type=checkbox]").on("click", function (e) {
+        if (this.checked) {
+            userPreference.add(this.value);
+        } else {
+            userPreference.delete(this.value);
+        }
+    });
+
+    $("#save_user_preference").on("click", function (e) {
+
+        let text = "";
+        for (let item of userPreference) text = text + "," + (item)
+        window.localStorage.setItem("USR_PREF", text);
+        $.mobile.changePage("#page2");
+    });
+
+    $("#changePageButton").click(function () {
+        //	$.mobile.changePage("#page2");
+        //	$.mobile.changePage( "about/us.html", { transition: "slideup"} );
+    });
+});
